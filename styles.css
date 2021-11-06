@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-image: url();
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  padding: 0;
+}
+
+.card-title {
+  font-weight: 900;
+  font-size: 2rem;
+}
