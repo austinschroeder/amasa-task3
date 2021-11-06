@@ -4,7 +4,11 @@
 }
 
 body {
-  background-image: url();
+  background-image: url(/assets/0ba8dfceaa16c47b713cbed42c1e6b34.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .navbar-brand {
@@ -12,7 +16,17 @@ body {
   padding: 0;
 }
 
+.card {
+  background-color: rgb(23, 23, 23);
+  opacity: 0.8;
+  color: white;
+}
+
 .card-title {
   font-weight: 900;
   font-size: 2rem;
+}
+
+.btn {
+  margin-bottom: 15px;
 }
