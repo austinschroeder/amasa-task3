@@ -2,13 +2,14 @@ const results = document.getElementById('results');
 const input = document.getElementById('searchTerm');
 const searchBtn = document.getElementById('search');
 const artistsApi = 'https://www.theaudiodb.com/api/v1/json/1/search.php?s=';
+const albumsApi = 'https://www.theaudiodb.com/api/v1/json/1/discography.php?s=';
 
 const getArtistTemplate = (artist) => {
   return `
 
     <div class="col-md-12">
         <div class="card mb-3">
-          <img src="${artist.strArtistBanner}" class="card-img-top" alt="...">
+          <img src="${artist.strArtistBanner}" class="card-img-top" alt="Band Image">
           <div class="card-body">
             <h5 class="card-title">${artist.strArtist}</h5>
             <p class="card-text">Year Formed: ${artist.intFormedYear}</p>
@@ -22,8 +23,6 @@ const getArtistTemplate = (artist) => {
   `;
 };
 
-// ${artist.strWebsite}
-
 const renderArtists = (artistArr) => {
   artistTemplates = [];
 
@@ -36,8 +35,8 @@ const renderArtists = (artistArr) => {
 
 searchBtn.addEventListener('click', (event) => {
   const query = input.value;
+  const clear = (document.getElementById('results').innerHTML = '');
 
-  // GET request using fetch
   fetch(artistsApi + query)
     .then((response) => {
       return response.json();
@@ -45,5 +44,45 @@ searchBtn.addEventListener('click', (event) => {
     .then((data) => {
       console.log(data);
       renderArtists(data.artists);
+    });
+
+  return clear;
+});
+
+const getAlbumTemplate = (album) => {
+  return `
+
+    <div class="col-md-12">
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">${album.strAlbum}</p>
+            <p class="card-text">Year Released: ${album.intYearReleased}</p>
+          </div>
+        </div>
+      </div>
+  `;
+};
+
+const renderAlbums = (albumArr) => {
+  albumTemplates = [];
+
+  albumArr.forEach((album) => {
+    albumTemplates.push(getAlbumTemplate(album));
+  });
+
+  results.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+};
+
+searchBtn.addEventListener('click', (event) => {
+  const query = input.value;
+  const clear = (document.getElementById('results').innerHTML = '');
+
+  fetch(albumsApi + query)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      renderAlbums(data.album);
     });
 });
