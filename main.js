@@ -14,7 +14,7 @@ const getArtistTemplate = (artist) => {
             <p class="card-text">Year Formed: ${artist.intFormedYear}</p>
             <p class="card-text">Genre: ${artist.strGenre}</p>
             <p class="card-text">Label: ${artist.strLabel}</p>
-            <a href="https://${artist.strWebsite}" class="btn btn-secondary" target="_blank">Go website</a>
+            <a href="https://${artist.strWebsite}" class="btn btn-secondary" target="_blank">Go to website</a>
             <p class="card-text">Bio: ${artist.strBiographyEN}</p>
           </div>
         </div>

@@ -3,12 +3,16 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background-image: url(assets/0ba8dfceaa16c47b713cbed42c1e6b34.jpg);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: fixed;
+  height: 100vh;
 }
 
 .navbar-brand {
@@ -18,7 +22,7 @@ body {
 
 .card {
   background-color: rgb(23, 23, 23);
-  opacity: 0.8;
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
 
@@ -29,4 +33,9 @@ body {
 
 .btn {
   margin-bottom: 15px;
+}
+
+h5,
+p {
+  opacity: 1;
 }
