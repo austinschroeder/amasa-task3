@@ -1,4 +1,5 @@
 const results = document.getElementById('results');
+const albums = document.getElementById('albums');
 const input = document.getElementById('searchTerm');
 const searchBtn = document.getElementById('search');
 const artistsApi = 'https://www.theaudiodb.com/api/v1/json/1/search.php?s=';
@@ -24,30 +25,6 @@ const getArtistTemplate = (artist) => {
   `;
 };
 
-const renderArtists = (artistArr) => {
-  artistTemplates = [];
-
-  artistArr.forEach((artist) => {
-    artistTemplates.push(getArtistTemplate(artist));
-  });
-
-  results.insertAdjacentHTML('afterbegin', artistTemplates.join(''));
-};
-
-searchBtn.addEventListener('click', (event) => {
-  const query = input.value;
-  const clear = (document.getElementById('results').innerHTML = '');
-
-  fetch(artistsApi + query)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      renderArtists(data.artists);
-    });
-});
-
 const getAlbumTemplate = (album) => {
   return `
 
@@ -62,6 +39,17 @@ const getAlbumTemplate = (album) => {
   `;
 };
 
+const renderArtists = (artistArr) => {
+  artistTemplates = [];
+
+  artistArr.forEach((artist) => {
+    artistTemplates.push(getArtistTemplate(artist));
+  });
+  // if length of array == 0.. render 'Sorry, no info on this artist
+  //else length of array >= 0, render <h3>Albums</h3> and results
+  results.insertAdjacentHTML('afterbegin', artistTemplates.join(''));
+};
+
 const renderAlbums = (albumArr) => {
   albumTemplates = [];
 
@@ -69,13 +57,21 @@ const renderAlbums = (albumArr) => {
     albumTemplates.push(getAlbumTemplate(album));
   });
 
-  results.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+  albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
 };
 
 searchBtn.addEventListener('click', (event) => {
   const query = input.value;
+  const clear = (document.getElementById('results').innerHTML = '');
 
-  // albumHeader.append('Albums');
+  fetch(artistsApi + query)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      renderArtists(data.artists ?? []);
+    });
 
   fetch(albumsApi + query)
     .then((response) => {
@@ -83,6 +79,8 @@ searchBtn.addEventListener('click', (event) => {
     })
     .then((data) => {
       console.log(data);
-      renderAlbums(data.album);
+      renderAlbums(data.album ?? []);
     });
+
+  document.getElementById('searchTerm').value = '';
 });
