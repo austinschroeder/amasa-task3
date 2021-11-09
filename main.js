@@ -40,7 +40,7 @@ const getAlbumTemplate = (album) => {
 };
 
 const renderArtists = (artistArr) => {
-  artistTemplates = [];
+  let = artistTemplates = [];
 
   artistArr.forEach((artist) => {
     artistTemplates.push(getArtistTemplate(artist));
@@ -62,7 +62,7 @@ const renderArtists = (artistArr) => {
 };
 
 const renderAlbums = (albumArr) => {
-  albumTemplates = [];
+  let = albumTemplates = [];
 
   albumArr.forEach((album) => {
     albumTemplates.push(getAlbumTemplate(album));
@@ -81,6 +81,11 @@ const renderAlbums = (albumArr) => {
 searchBtn.addEventListener('click', (event) => {
   event.preventDefault();
   const query = input.value;
+
+  if (!query) {
+    console.log('No input added');
+    return;
+  }
 
   const getData = (url) => {
     return fetch(url).then((response) => {

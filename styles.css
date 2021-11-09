@@ -33,7 +33,8 @@ body {
 }
 
 .album-title {
-  text-decoration: underline;
+  font-weight: 700;
+  font-size: larger;
 }
 
 .btn {
@@ -48,4 +49,8 @@ p {
 .albumHeader,
 .emptyResult {
   color: red;
+  background-color: black;
+  width: auto;
+  border-radius: 5px;
+  text-align: center;
 }
