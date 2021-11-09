@@ -31,7 +31,7 @@ const getAlbumTemplate = (album) => {
     <div class="col-md-12">
         <div class="card mb-3">
           <div class="card-body">
-            <p class="card-text">${album.strAlbum}</p>
+            <p class="album-title card-text">${album.strAlbum}</p>
             <p class="card-text">Year Released: ${album.intYearReleased}</p>
           </div>
         </div>
@@ -68,20 +68,7 @@ const renderAlbums = (albumArr) => {
     albumTemplates.push(getAlbumTemplate(album));
   });
 
-  if (albumTemplates.length === 0) {
-    const noAlbum = document.createElement('p');
-    noAlbum.className = 'emptyResult';
-    noAlbum.textContent = 'No Album info available';
-    results.innerHTML = '';
-    results.appendChild(noAlbum);
-  } else {
-    const albumHeader = document.createElement('h3');
-    albumHeader.className = 'albumHeader';
-    albumHeader.textContent = 'No Album info available:';
-    results.innerHTML = '';
-    results.appendChild(albumHeader);
-    albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
-  }
+  albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
 };
 
 searchBtn.addEventListener('click', (event) => {
@@ -105,7 +92,6 @@ searchBtn.addEventListener('click', (event) => {
   });
 
   //TOOK THIS CODE AND REFACTORED IT ABOVE TO BE MORE EFFICIENT
-
   // fetch(artistsApi + query)
   //   .then((response) => {
   //     return response.json();

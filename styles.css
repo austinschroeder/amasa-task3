@@ -32,6 +32,10 @@ body {
   font-size: 2rem;
 }
 
+.album-title {
+  text-decoration: underline;
+}
+
 .btn {
   margin-bottom: 15px;
 }
