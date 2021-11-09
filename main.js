@@ -67,8 +67,15 @@ const renderAlbums = (albumArr) => {
   albumArr.forEach((album) => {
     albumTemplates.push(getAlbumTemplate(album));
   });
-
-  albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+  if (albumTemplates.length === 0) {
+    const noAlbum = document.createElement('p');
+    noAlbum.className = 'emptyResult';
+    noAlbum.textContent = 'No Album info available';
+    results.innerHTML = '';
+    results.appendChild(noAlbum);
+  } else {
+    albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+  }
 };
 
 searchBtn.addEventListener('click', (event) => {
