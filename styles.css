@@ -8,10 +8,10 @@ html {
 }
 
 body {
-  background-image: url(assets/0ba8dfceaa16c47b713cbed42c1e6b34.jpg);
+  background-image: url(assets/bkg_img.jpg); /*Sourced from google */
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: fixed;
+  background-position: center;
   background-attachment: fixed;
   height: 100vh;
 }

@@ -71,8 +71,8 @@ const renderAlbums = (albumArr) => {
     const noAlbum = document.createElement('p');
     noAlbum.className = 'emptyResult';
     noAlbum.textContent = 'No Album info available';
-    results.innerHTML = '';
-    results.appendChild(noAlbum);
+    albums.innerHTML = '';
+    albums.appendChild(noAlbum);
   } else {
     albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
   }
