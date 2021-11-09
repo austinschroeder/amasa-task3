@@ -45,9 +45,20 @@ const renderArtists = (artistArr) => {
   artistArr.forEach((artist) => {
     artistTemplates.push(getArtistTemplate(artist));
   });
-  // if length of array == 0.. render 'Sorry, no info on this artist
-  //else length of array >= 0, render <h3>Albums</h3> and results
-  results.insertAdjacentHTML('afterbegin', artistTemplates.join(''));
+  if (artistTemplates.length === 0) {
+    const noArtist = document.createElement('p');
+    noArtist.className = 'emptyResult';
+    noArtist.textContent = 'No Artist info available';
+    results.innerHTML = '';
+    results.appendChild(noArtist);
+  } else {
+    const albumHeader = document.createElement('h3');
+    albumHeader.className = 'albumHeader';
+    albumHeader.textContent = 'Albums:';
+    results.innerHTML = '';
+    results.appendChild(albumHeader);
+    results.insertAdjacentHTML('afterbegin', artistTemplates.join(''));
+  }
 };
 
 const renderAlbums = (albumArr) => {
@@ -57,30 +68,61 @@ const renderAlbums = (albumArr) => {
     albumTemplates.push(getAlbumTemplate(album));
   });
 
-  albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+  if (albumTemplates.length === 0) {
+    const noAlbum = document.createElement('p');
+    noAlbum.className = 'emptyResult';
+    noAlbum.textContent = 'No Album info available';
+    results.innerHTML = '';
+    results.appendChild(noAlbum);
+  } else {
+    const albumHeader = document.createElement('h3');
+    albumHeader.className = 'albumHeader';
+    albumHeader.textContent = 'No Album info available:';
+    results.innerHTML = '';
+    results.appendChild(albumHeader);
+    albums.insertAdjacentHTML('afterbegin', albumTemplates.join(''));
+  }
 };
 
 searchBtn.addEventListener('click', (event) => {
+  event.preventDefault();
   const query = input.value;
-  const clear = (document.getElementById('results').innerHTML = '');
 
-  fetch(artistsApi + query)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      renderArtists(data.artists ?? []);
+  const getData = (url) => {
+    return fetch(url).then((response) => {
+      const result = response.json();
+      console.log(result);
+      return result;
     });
+  };
 
-  fetch(albumsApi + query)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      renderAlbums(data.album ?? []);
-    });
+  getData(artistsApi + query).then((data) => {
+    renderArtists(data.artists ?? []);
+  });
+
+  getData(albumsApi + query).then((data) => {
+    renderAlbums(data.album ?? []);
+  });
+
+  //TOOK THIS CODE AND REFACTORED IT ABOVE TO BE MORE EFFICIENT
+
+  // fetch(artistsApi + query)
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  // .then((data) => {
+  //   console.log(data);
+  //   renderArtists(data.artists ?? []);
+  // });
+
+  // fetch(albumsApi + query)
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     console.log(data);
+  //     renderAlbums(data.album ?? []);
+  //   });
 
   document.getElementById('searchTerm').value = '';
 });

@@ -40,3 +40,8 @@ h5,
 p {
   opacity: 1;
 }
+
+.albumHeader,
+.emptyResult {
+  color: red;
+}
