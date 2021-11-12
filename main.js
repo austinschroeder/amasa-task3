@@ -40,7 +40,7 @@ const getAlbumTemplate = (album) => {
 };
 
 const renderArtists = (artistArr) => {
-  let = artistTemplates = [];
+  let artistTemplates = [];
 
   artistArr.forEach((artist) => {
     artistTemplates.push(getArtistTemplate(artist));
@@ -62,7 +62,7 @@ const renderArtists = (artistArr) => {
 };
 
 const renderAlbums = (albumArr) => {
-  let = albumTemplates = [];
+  let albumTemplates = [];
 
   albumArr.forEach((album) => {
     albumTemplates.push(getAlbumTemplate(album));
