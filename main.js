@@ -4,7 +4,6 @@ const input = document.getElementById('searchTerm');
 const searchBtn = document.getElementById('search');
 const artistsApi = 'https://www.theaudiodb.com/api/v1/json/1/search.php?s=';
 const albumsApi = 'https://www.theaudiodb.com/api/v1/json/1/discography.php?s=';
-// const albumHeader = document.createElement('h4');
 
 const getArtistTemplate = (artist) => {
   return `
@@ -39,6 +38,7 @@ const getAlbumTemplate = (album) => {
   `;
 };
 
+// For artist API
 const renderArtists = (artistArr) => {
   let artistTemplates = [];
 
@@ -61,6 +61,7 @@ const renderArtists = (artistArr) => {
   }
 };
 
+// For album API
 const renderAlbums = (albumArr) => {
   let albumTemplates = [];
 
@@ -78,6 +79,7 @@ const renderAlbums = (albumArr) => {
   }
 };
 
+// Event handler
 searchBtn.addEventListener('click', (event) => {
   event.preventDefault();
   const query = input.value;
