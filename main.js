@@ -4,6 +4,7 @@ const input = document.getElementById('searchTerm');
 const searchBtn = document.getElementById('search');
 const artistsApi = 'https://www.theaudiodb.com/api/v1/json/1/search.php?s=';
 const albumsApi = 'https://www.theaudiodb.com/api/v1/json/1/discography.php?s=';
+// NEED TO UPDATE GO A NEW API ENDPOINT 
 
 const getArtistTemplate = (artist) => {
   return `
